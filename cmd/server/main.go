@@ -1,3 +1,4 @@
+// Entry point: config, wiring, graceful shutdown
 package main
 
 import "fmt"
