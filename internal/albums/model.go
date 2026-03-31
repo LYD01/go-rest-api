@@ -3,16 +3,23 @@ package albums
 
 import "errors"
 
-type album struct {
-	Id: string `json:"id"`
-	Title: string `json:"title"`
-	Artist: string `json:"artist"`
-	Price: float64 `json:"price"`
+type Album struct {
+	Id string `json:"id"`
+	Title string `json:"title"`
+	Artist string `json:"artist"`
+	Price float64 `json:"price"`
 }
 
 
-var ablums = []album {
-	{Id: "1", Title: "Blue Train", Artist: "John Coltrane", Pirce: 56.99},
-	{Id: "2", Title: "Jeru", Artist: "Gerry Mulligan", Pirce: 17.99},
-	{Id: "3", Title: "Sarah Vaughan and Clifford Brown", Artist: "Sarah Vaughan", Pirce: 39.99},
+func (a Album) Validate() error {
+	if a.Title == "" {
+		return errors.New("title is required")
+	}
+	if a.Artist == "" {
+		return errors.New("artist is required")
+	}
+	if a.Price < 0 {
+		return errors.New("price must be non-negative")
+	}
+	return nil
 }
