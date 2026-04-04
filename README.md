@@ -1,4 +1,4 @@
-# go-api
+# go-api (handwritten w/ nvim)
 
 A small JSON HTTP service in Go: in-memory albums, API-key protection for album routes, middleware (request ID, logging, panic recovery), and graceful shutdown.
 
