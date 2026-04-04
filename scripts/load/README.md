@@ -1,4 +1,4 @@
-# Load tests (k6)
+# Load tests with k6 (tests have been make with ai)
 
 [k6](https://k6.io/) drives HTTP scenarios against **your** server. Do not point these scripts at hosts you do not own or lack permission to test.
 
