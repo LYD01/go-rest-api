@@ -9,19 +9,18 @@ package albums
 import "sync"
 
 type Store struct {
-	mu sync.Mutex
+	mu     sync.RWMutex
 	albums []Album
 }
 
-func NewStore() *store {
-	return &Store(
-		ablums: []Album {
-	{Id: "1", Title: "Blue Train", Artist: "John Coltrane", Pirce: 56.99},
-	{Id: "2", Title: "Jeru", Artist: "Gerry Mulligan", Pirce: 17.99},
-	{Id: "3", Title: "Sarah Vaughan and Clifford Brown", Artist: "Sarah Vaughan", Pirce: 39.99},
-		} 
-
-	)
+func NewStore() *Store {
+	return &Store{
+		albums: []Album{
+			{Id: "1", Title: "Blue Train", Artist: "John Coltrane", Price: 56.99},
+			{Id: "2", Title: "Jeru", Artist: "Gerry Mulligan", Price: 17.99},
+			{Id: "3", Title: "Sarah Vaughan and Clifford Brown", Artist: "Sarah Vaughan", Price: 39.99},
+		},
+	}
 }
 
 /*
@@ -35,8 +34,8 @@ copy result
 return result
 */
 
-func (s, *Store) GetAll() []Album {
-	s.mu.RLock
+func (s *Store) GetAll() []Album {
+	s.mu.RLock()
 	defer s.mu.RUnlock()
 	result := make([]Album, len(s.albums))
 	copy(result, s.albums)
@@ -49,9 +48,9 @@ lock the data
 deffer the lock
 loop through albums return true on id match, return false on miss
 */
-func (s, *Store) GetById(id string) (Album, bool) {
+func (s *Store) GetById(id string) (Album, bool) {
 	s.mu.RLock()
-	deffer s.mu.RUnlock()
+	defer s.mu.RUnlock()
 	for _, a := range s.albums {
 		if id == a.Id {
 			return a, true
@@ -61,9 +60,9 @@ func (s, *Store) GetById(id string) (Album, bool) {
 }
 
 
-func (s, *Store) Create(a Album) {
-	s.mu.RLock()
-	deffer s.mu.RUnlock()
+func (s *Store) Create(a Album) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
 	s.albums = append(s.albums, a)
 }
 

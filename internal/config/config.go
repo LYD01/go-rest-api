@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"os"
 	"strings"
-	"text/scanner"
 )
 
 
@@ -54,8 +53,7 @@ func Load() (*Config, error) {
 		return nil, fmt.Errorf("API_KEY environment variable is required")
 	}
 
-	addr := os.Getenv("API_KEY")
-
+	addr := os.Getenv("ADDR")
 	if addr == "" {
 		addr = ":8080"
 	}
