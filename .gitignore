@@ -1,2 +1,5 @@
 .env
 .env.local
+
+# Local k6 binary (optional; see scripts/load/README.md for install)
+.tools/

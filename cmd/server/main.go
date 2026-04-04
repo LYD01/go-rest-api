@@ -5,6 +5,7 @@ import (
 	"context"
 	"log/slog"
 	"net/http"
+	_ "net/http/pprof" // registers handlers on DefaultServeMux when PPROF_ADDR is set
 	"os"
 	"os/signal"
 	"syscall"
@@ -21,6 +22,15 @@ func main() {
 	if err != nil {
 		slog.Error("failed to load config", "error", err)
 		os.Exit(1)
+	}
+
+	if pprofAddr := os.Getenv("PPROF_ADDR"); pprofAddr != "" {
+		go func() {
+			slog.Info("pprof listening", "addr", pprofAddr)
+			if err := http.ListenAndServe(pprofAddr, nil); err != nil {
+				slog.Error("pprof server exited", "error", err)
+			}
+		}()
 	}
 
 	store := albums.NewStore()

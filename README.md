@@ -80,6 +80,13 @@ curl -s -X POST -H "Content-Type: application/json" -H "X-API-Key: your-secret" 
   localhost:8080/albums
 ```
 
+## Load testing
+
+- Scenarios and success criteria: [docs/load-test-scenarios.md](docs/load-test-scenarios.md)
+- k6 scripts and `./scripts/load/run-all.sh`: [scripts/load/README.md](scripts/load/README.md)
+- Observability (CPU, pprof): [docs/load-test-observability.md](docs/load-test-observability.md)
+- Example report and k6 JSON exports: [docs/perf-report-2026-04-05.md](docs/perf-report-2026-04-05.md), [docs/load-results/](docs/load-results/)
+
 ## Project layout
 
 ```
