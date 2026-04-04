@@ -1,6 +1,6 @@
 # go-api (handwritten w/ nvim)
 
-A small JSON HTTP service in Go: in-memory albums, API-key protection for album routes, middleware (request ID, logging, panic recovery), and graceful shutdown.
+A small JSON HTTP service in Go: in-memory albums, API-key protection for album routes, middleware (request ID, logging, panic recovery), and graceful shutdown. A recent [performance / load test report](https://github.com/LYD01/go-rest-api/blob/main/docs/perf-report-2026-04-05.md) (k6 on localhost) summarizes throughput and latency for this style of API.
 
 ## Requirements
 
